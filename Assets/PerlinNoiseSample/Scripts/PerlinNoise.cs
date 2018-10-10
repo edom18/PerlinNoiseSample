@@ -90,8 +90,7 @@ public class PerlinNoise
     }
 
     /// <summary>
-    /// 上の関数を分かりやすく書くと以下となる
-    /// これを、bit反転などを使って短く描いたのが上記
+    /// To simplify above function to below.
     /// </summary>
     // private float Grad(int hash, float x, float y, float z)
     // {
@@ -119,12 +118,12 @@ public class PerlinNoise
 
     private float Noise(float x, float y = 0, float z = 0)
     {
-        // 255の間で値を繰り返す
+        // Repeat while 0 - 255
         int X = (int)Mathf.Floor(x) & 255;
         int Y = (int)Mathf.Floor(y) & 255;
         int Z = (int)Mathf.Floor(z) & 255;
 
-        // 小数点以下の数字にする
+        // trim integer
         x -= Mathf.Floor(x);
         y -= Mathf.Floor(y);
         z -= Mathf.Floor(z);
