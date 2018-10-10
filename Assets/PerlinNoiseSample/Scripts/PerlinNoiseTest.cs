@@ -25,18 +25,35 @@ public class PerlinNoiseTest : MonoBehaviour
     private uint _seed = 1000;
 
     private PerlinNoise _noise;
+    private PerlinNoise Noise
+    {
+        get
+        {
+            if (_noise == null)
+            {
+                _noise = new PerlinNoise(_seed);
+            }
+            return _noise;
+        }
+    }
     private Texture2D _texture;
 
     private void Start()
     {
-        _noise = new PerlinNoise(_seed);
         CreateNoise();
+    }
+
+    private void OnValidate()
+    {
+        if (Application.isPlaying)
+        {
+            CreateNoise();
+        }
     }
 
     private void CreateNoise()
     {
         _texture = new Texture2D(_width, _height, TextureFormat.RGBA32, false);
-
 
         Color[] pixels = new Color[_width * _height];
         float fx = (float)_width / _frequency;
@@ -45,7 +62,7 @@ public class PerlinNoiseTest : MonoBehaviour
         {
             int x = i % _width;
             int y = i / _width;
-            float n = _noise.OctaveNoise(x / fx, y / fy, _octaves);
+            float n = Noise.OctaveNoise(x / fx, y / fy, _octaves);
             float c = Mathf.Clamp(218f * (0.5f + n * 0.5f), 0f, 255f) / 255f;
             pixels[i] = new Color(c, c, c, 1f);
         }
