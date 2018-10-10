@@ -135,20 +135,23 @@ public class PerlinNoise
         int[] p = _p;
 
         #region ### calulate hashes from array of p ###
-        int A, AA, AB, B, BA, BB;
+        int A, B, AA, AB, BA, BB, AAA, ABA, AAB, ABB, BAA, BBA, BAB, BBB;
 
         A = p[X + 0] + Y; AA = p[A] + Z; AB = p[A + 1] + Z;
         B = p[X + 1] + Y; BA = p[B] + Z; BB = p[B + 1] + Z;
+
+        AAA = p[AA + 0]; ABA = p[BA + 0]; AAB = p[AB + 0]; ABB = p[BB + 0];
+        BAA = p[AA + 1]; BBA = p[BA + 1]; BAB = p[AB + 1]; BBB = p[BB + 1];
         #endregion ### calulate hashes from array of p ###
 
-        float a = Grad(p[AA + 0], x + 0, y + 0, z + 0);
-        float b = Grad(p[BA + 0], x - 1, y + 0, z + 0);
-        float c = Grad(p[AB + 0], x + 0, y - 1, z + 0);
-        float d = Grad(p[BB + 0], x - 1, y - 1, z + 0);
-        float e = Grad(p[AA + 1], x + 0, y + 0, z - 1);
-        float f = Grad(p[BA + 1], x - 1, y + 0, z - 1);
-        float g = Grad(p[AB + 1], x + 0, y - 1, z - 1);
-        float h = Grad(p[BB + 1], x - 1, y - 1, z - 1);
+        float a = Grad(AAA, x + 0, y + 0, z + 0);
+        float b = Grad(ABA, x - 1, y + 0, z + 0);
+        float c = Grad(AAB, x + 0, y - 1, z + 0);
+        float d = Grad(ABB, x - 1, y - 1, z + 0);
+        float e = Grad(BAA, x + 0, y + 0, z - 1);
+        float f = Grad(BBA, x - 1, y + 0, z - 1);
+        float g = Grad(BAB, x + 0, y - 1, z - 1);
+        float h = Grad(BBB, x - 1, y - 1, z - 1);
 
         return Lerp(w, Lerp(v, Lerp(u, a, b),
                                Lerp(u, c, d)),
