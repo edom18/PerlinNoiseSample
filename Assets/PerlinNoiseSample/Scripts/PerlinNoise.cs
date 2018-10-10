@@ -135,10 +135,12 @@ public class PerlinNoise
 
         int[] p = _p;
 
+        #region ### calulate hashes from array of p ###
         int A, AA, AB, B, BA, BB;
 
         A = p[X + 0] + Y; AA = p[A] + Z; AB = p[A + 1] + Z;
         B = p[X + 1] + Y; BA = p[B] + Z; BB = p[B + 1] + Z;
+        #endregion ### calulate hashes from array of p ###
 
         float a = Grad(p[AA + 0], x + 0, y + 0, z + 0);
         float b = Grad(p[BA + 0], x - 1, y + 0, z + 0);
