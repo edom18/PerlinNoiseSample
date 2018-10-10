@@ -154,4 +154,52 @@ public class PerlinNoise
                        Lerp(v, Lerp(u, e, f),
                                Lerp(u, g, h)));
     }
+
+    public float OctaveNoise(float x, int octaves)
+    {
+        float result = 0;
+        float amp = 1.0f;
+
+        for (int i = 0; i < octaves; i++)
+        {
+            result += Noise(x) * amp;
+            x *= 2.0f;
+            amp *= 0.5f;
+        }
+
+        return result;
+    }
+
+    public float OctaveNoise(float x, float y, int octaves)
+    {
+        float result = 0;
+        float amp = 1.0f;
+
+        for (int i = 0; i < octaves; i++)
+        {
+            result += Noise(x, y) * amp;
+            x *= 2.0f;
+            y *= 2.0f;
+            amp *= 0.5f;
+        }
+
+        return result;
+    }
+
+    public float OctaveNoise(float x, float y, float z, int octaves)
+    {
+        float result = 0;
+        float amp = 1.0f;
+
+        for (int i = 0; i < octaves; i++)
+        {
+            result += Noise(x, y, z) * amp;
+            x *= 2.0f;
+            y *= 2.0f;
+            z *= 2.0f;
+            amp *= 0.5f;
+        }
+
+        return result;
+    }
 }
