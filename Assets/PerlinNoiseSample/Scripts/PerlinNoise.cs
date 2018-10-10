@@ -39,6 +39,7 @@ public class PerlinNoise
 {
     private Xorshift _xorshit;
     private int[] _p;
+    public float Frequency = 32.0f;
 
     /// <summary>
     /// Constructor
@@ -163,47 +164,53 @@ public class PerlinNoise
     {
         float result = 0;
         float amp = 1.0f;
+        float f = Frequency;
+        float maxValue = 0;
 
         for (int i = 0; i < octaves; i++)
         {
-            result += Noise(x) * amp;
-            x *= 2.0f;
+            result += Noise(x * f) * amp;
+            f *= 2.0f;
+            maxValue += amp;
             amp *= 0.5f;
         }
 
-        return result;
+        return result / maxValue;
     }
 
     public float OctaveNoise(float x, float y, int octaves)
     {
         float result = 0;
         float amp = 1.0f;
+        float f = Frequency;
+        float maxValue = 0;
 
         for (int i = 0; i < octaves; i++)
         {
-            result += Noise(x, y) * amp;
-            x *= 2.0f;
-            y *= 2.0f;
+            result += Noise(x * f, y * f) * amp;
+            f *= 2.0f;
+            maxValue += amp;
             amp *= 0.5f;
         }
 
-        return result;
+        return result / maxValue;
     }
 
     public float OctaveNoise(float x, float y, float z, int octaves)
     {
         float result = 0;
         float amp = 1.0f;
+        float f = Frequency;
+        float maxValue = 0;
 
         for (int i = 0; i < octaves; i++)
         {
-            result += Noise(x, y, z) * amp;
-            x *= 2.0f;
-            y *= 2.0f;
-            z *= 2.0f;
+            result += Noise(x * f, y * f, z * f) * amp;
+            f *= 2.0f;
+            maxValue += amp;
             amp *= 0.5f;
         }
 
-        return result;
+        return result / maxValue;
     }
 }

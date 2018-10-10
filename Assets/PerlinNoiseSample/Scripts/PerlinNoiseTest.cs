@@ -55,14 +55,16 @@ public class PerlinNoiseTest : MonoBehaviour
     {
         _texture = new Texture2D(_width, _height, TextureFormat.RGBA32, false);
 
+        Noise.Frequency = _frequency;
+
         Color[] pixels = new Color[_width * _height];
-        float fx = (float)_width / _frequency;
-        float fy = (float)_height / _frequency;
+        float fx = 1f / (float)_width;// / _frequency;
+        float fy = 1f / (float)_height; // / _frequency;
         for (int i = 0; i < pixels.Length; i++)
         {
             int x = i % _width;
             int y = i / _width;
-            float n = Noise.OctaveNoise(x / fx, y / fy, _octaves);
+            float n = Noise.OctaveNoise(x * fx, y * fy, _octaves);
             float c = Mathf.Clamp(218f * (0.5f + n * 0.5f), 0f, 255f) / 255f;
             pixels[i] = new Color(c, c, c, 1f);
         }
