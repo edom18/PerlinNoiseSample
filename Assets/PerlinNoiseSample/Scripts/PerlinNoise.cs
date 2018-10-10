@@ -160,7 +160,7 @@ public class PerlinNoise
                                Lerp(u, g, h)));
     }
 
-    public float OctaveNoise(float x, int octaves)
+    public float OctaveNoise(float x, int octaves, float persistence = 0.5f)
     {
         float result = 0;
         float amp = 1.0f;
@@ -172,13 +172,13 @@ public class PerlinNoise
             result += Noise(x * f) * amp;
             f *= 2.0f;
             maxValue += amp;
-            amp *= 0.5f;
+            amp *= persistence;
         }
 
         return result / maxValue;
     }
 
-    public float OctaveNoise(float x, float y, int octaves)
+    public float OctaveNoise(float x, float y, int octaves, float persistence = 0.5f)
     {
         float result = 0;
         float amp = 1.0f;
@@ -190,13 +190,13 @@ public class PerlinNoise
             result += Noise(x * f, y * f) * amp;
             f *= 2.0f;
             maxValue += amp;
-            amp *= 0.5f;
+            amp *= persistence;
         }
 
         return result / maxValue;
     }
 
-    public float OctaveNoise(float x, float y, float z, int octaves)
+    public float OctaveNoise(float x, float y, float z, int octaves, float persistence = 0.5f)
     {
         float result = 0;
         float amp = 1.0f;
@@ -208,7 +208,7 @@ public class PerlinNoise
             result += Noise(x * f, y * f, z * f) * amp;
             f *= 2.0f;
             maxValue += amp;
-            amp *= 0.5f;
+            amp *= persistence;
         }
 
         return result / maxValue;

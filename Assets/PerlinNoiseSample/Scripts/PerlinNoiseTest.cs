@@ -16,6 +16,9 @@ public class PerlinNoiseTest : MonoBehaviour
     private float _frequency = 32.0f;
 
     [SerializeField]
+    private float _persistence = 0.5f;
+
+    [SerializeField]
     private int _width = 512;
 
     [SerializeField]
@@ -64,7 +67,7 @@ public class PerlinNoiseTest : MonoBehaviour
         {
             int x = i % _width;
             int y = i / _width;
-            float n = Noise.OctaveNoise(x * fx, y * fy, _octaves);
+            float n = Noise.OctaveNoise(x * fx, y * fy, _octaves, _persistence);
             float c = Mathf.Clamp(218f * (0.5f + n * 0.5f), 0f, 255f) / 255f;
             pixels[i] = new Color(c, c, c, 1f);
         }
